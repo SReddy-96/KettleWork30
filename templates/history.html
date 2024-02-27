@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block main %}
+<div class="container center-content my-5">
+    <h1>Workout History</h1>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="header">
+            <tr>
+                <th scope="col">Date / Time</th>
+                <th scope="col">Level</th>
+                <th scope="col">Exercises</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for history in histories%}
+            <tr>
+                <td>{{ history.Timestamp}}</td>
+                <td>{{history.level}}</td>
+                <td>{{ history.names }}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

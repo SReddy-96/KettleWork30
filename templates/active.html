@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Workout
+{% endblock %}
+
+{% block main %}
+
+<h1>Active Workout</h1>
+<div class="container center-content flex-column">
+    <div id="workout-display" class="container">
+
+    </div>
+
+    <!-- timer and progress bar -->
+    <div class="container">
+        <!-- will display once timer finishes -->
+        <p id="timerFinished" style="display: none;">Finished</p>
+
+        <span id="time">30:00</span>
+        <div class="progress mx-auto mb-2" style="max-width: 300px;">
+            <div class="progress-bar bg-success" role="progressbar" id="progressBar" style="width: 100%"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Function to start the timer
+    function startTimer(duration, display, bar) {
+        var timer = duration;
+        var interval = setInterval(function () {
+            var minutes = parseInt(timer / 60, 10);
+            var seconds = parseInt(timer % 60, 10);
+
+            // Update progress bar
+            bar.style.width = ((duration - timer) * 100 / duration) + "%";
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval); // Stop the timer
+                // Handle timer finish
+                timerFinished();
+            }
+        }, 1000);
+    }
+
+    // Function to display workout
+    function displayWorkout(workouts) {
+        document.getElementById('workout-display').innerHTML = `
+            <h2>${workouts.name}</h2>
+            <img src="https://res.cloudinary.com/dxlhov3uy/image/upload/${workouts.image_url}.gif" alt="${workouts.name}">
+            <p>${workouts.description}</p>
+        `;
+    }
+
+    // Function to handle rest
+    function rest() {
+        document.getElementById('workout-display').innerHTML = `
+            <h2>REST</h2>
+        `;
+    }
+
+    // Function to handle timer finish
+    function timerFinished() {
+        document.getElementById('workout-display').innerHTML = `
+            <h2>Finished!</h2>
+        `;
+    }
+
+    window.onload = function () {
+        var workouts = {{ workout|safe }}; // Assuming workouts are passed from Flask
+        var index = 0;
+        var totalWorkouts = workouts.length;
+
+        var display = document.querySelector('#time');
+        var bar = document.querySelector('#progressBar');
+        var workoutDuration = 40; // Duration for each workout in seconds
+        var restDuration = 20; // Duration for rest in seconds
+
+        // Start the timer for the first workout
+        startTimer(workoutDuration, display, bar);
+
+        // Set up intervals to alternate between displaying workouts and rest
+        var interval = setInterval(function () {
+        // Display workout
+            displayWorkout(workouts[index]);
+            index++;
+
+            // If all workouts are displayed, stop the interval
+            if (index >= totalWorkouts) {
+                clearInterval(interval);
+                // Display "Finished" message
+                timerFinished();
+                return;
+            }
+
+            // Display rest after displaying workout
+            setTimeout(function () {
+                rest();
+                // Start timer for the next workout
+                startTimer(workoutDuration, display, bar);
+            }, workoutDuration * 1000);
+
+        }, (workoutDuration + restDuration) * 1000); // Interval is total duration of workout + rest
+    }
+</script>
+
+
+
+{% endblock %}

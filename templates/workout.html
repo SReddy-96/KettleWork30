@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Workout
+{% endblock %}
+
+{% block main %}
+<div class="container center-content mt-5">
+    <form method="post" action="/workout">
+
+        <div class="mb-3">
+            <input type="radio" class="btn-check" name="level-outlined" id="easy" value="easy" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="easy">Easy</label>
+
+            <input type="radio" class="btn-check" name="level-outlined" id="medium" value="medium" autocomplete="off">
+            <label class="btn btn-outline-primary" for="medium">Medium</label>
+
+            <input type="radio" class="btn-check" name="level-outlined" id="hard" value="hard" autocomplete="off">
+            <label class="btn btn-outline-primary" for="hard">Hard</label>
+        </div>
+
+        <div class="mb-3">
+            <input type="radio" class="btn-check" name="exercise-outlined" id="pull" value="pull" autocomplete="off">
+            <label class="btn btn-outline-success" for="pull">Pull</label>
+            <input type="radio" class="btn-check" name="exercise-outlined" id="push" value="push" autocomplete="off">
+            <label class="btn btn-outline-success" for="push">Push</label>
+            <input type="radio" class="btn-check" name="exercise-outlined" id="leg" value="leg" autocomplete="off">
+            <label class="btn btn-outline-success" for="leg">Leg</label>
+            <input type="radio" class="btn-check" name="exercise-outlined" id="fullbody" value="fullbody" autocomplete="off">
+            <label class="btn btn-outline-success" for="fullbody">Full body</label>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Start</button>
+    </form>
+</div>
+
+
+{% endblock %}

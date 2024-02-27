@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block main %}
+<div class="container center-content">
+    <div class="card shadow mt-5" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='mockimage/register.jpg') }}" class="card-img-top"
+            alt="image of kettle bells">
+        <div class="card-body">
+            <h5 class="card-title">Register</h5>
+            <form action="/register" method="post">
+                <div class="mb-3">
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username"
+                        placeholder="Username" type="text">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Password"
+                        type="password">
+                </div>
+                <button class="btn btn-primary" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
