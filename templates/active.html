@@ -74,7 +74,8 @@ Workout
     }
 
     window.onload = function () {
-        var workouts = {{ workout|safe }}; // Assuming workouts are passed from Flask
+        var workouts = JSON.parse('{{ workout | safe }}');// Assuming workouts are passed from Flask
+        var workoutKeys = Object.keys(workouts); // Get the keys of the workouts object 
         var index = 0;
         var totalWorkouts = workouts.length;
 
@@ -82,14 +83,26 @@ Workout
         var bar = document.querySelector('#progressBar');
         var workoutDuration = 40; // Duration for each workout in seconds
         var restDuration = 20; // Duration for rest in seconds
+        var totalTime = 1800; // total time of 30mins in seconds
+
+        // start the first workout 
+        displayWorkout(workouts[workoutKeys[index]]);
+        index++
 
         // Start the timer for the first workout
-        startTimer(workoutDuration, display, bar);
+        startTimer(totalTime, display, bar);
+
+        // Display rest after displaying first workout
+        setTimeout(function () {
+            rest();
+        }, workoutDuration * 1000);
+        
 
         // Set up intervals to alternate between displaying workouts and rest
         var interval = setInterval(function () {
         // Display workout
-            displayWorkout(workouts[index]);
+            var currentWorkout = workouts[workoutKeys[index]]; // Accessing workout using its key
+            displayWorkout(currentWorkout);
             index++;
 
             // If all workouts are displayed, stop the interval
@@ -103,11 +116,9 @@ Workout
             // Display rest after displaying workout
             setTimeout(function () {
                 rest();
-                // Start timer for the next workout
-                startTimer(workoutDuration, display, bar);
             }, workoutDuration * 1000);
 
-        }, (workoutDuration + restDuration) * 1000); // Interval is total duration of workout + rest
+        }, (workoutDuration + restDuration) * 1000); // Interval is total duration of workout + rest (60s)
     }
 </script>
 
