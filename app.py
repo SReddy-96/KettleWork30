@@ -57,15 +57,25 @@ def workout():
 
         cooldown = rand_workout("cooldown", 3)
         if not cooldown:
-	        return apology("cooldown DB fail", 400)
+            return apology("cooldown DB fail", 400)
 
         # using the results form form to create the workout.
-        if level == "easy" and exercise == "push":	
+        if level == "easy" and exercise == "push":
+            # first create a random workout then construct the whole workout and save to a variable
             pusheasyworkout = repeat_exercise(warmup, (rand_workout("pusheasy", 8)), cooldown)
             if not pusheasyworkout:		
-                return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in pusheasyworkout.values()) 
+                return apology("Workout error", 400)
+
+            # concatenate all the names of thr workout together separating with a comma to add to the users history 
+            names = ', '.join(value['name'] for value in pusheasyworkout.values())
+
+            # process the python dict into a JSON object, making it easier to display the workout
+            pusheasyworkout = json.dumps(pusheasyworkout) 
+
+            # insert the level, user_id and concatenated names to the history DB so the user can look at previous workouts
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "easy", names)
+
+            # return the render_template of active.html to display the workout and pass through the JSON object.
             return render_template("active.html", workout=pusheasyworkout)
 
         if level == "easy" and exercise == "pull":
@@ -73,7 +83,8 @@ def workout():
             pulleasyworkout = repeat_exercise(warmup, pulleasy, cooldown)
             if not pulleasyworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in pulleasyworkout.values())   
+            names = ', '.join(value['name'] for value in pulleasyworkout.values())
+            pulleasyworkout = json.dumps(pulleasyworkout)   
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "easy", names)    
             return render_template("active.html", workout=pulleasyworkout)
 
@@ -82,7 +93,8 @@ def workout():
             legeasyworkout = repeat_exercise(warmup, legeasy, cooldown)
             if not legeasyworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in legeasyworkout.values())   
+            names = ', '.join(value['name'] for value in legeasyworkout.values())
+            legeasyworkout = json.dumps(legeasyworkout)
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "easy", names)    
             return render_template("active.html", workout=legeasyworkout)
         
@@ -91,7 +103,8 @@ def workout():
             pullmedworkout = repeat_exercise(warmup, pullmed, cooldown)
             if not pullmedworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in pullmedworkout.values())   
+            names = ', '.join(value['name'] for value in pullmedworkout.values())
+            pullmedworkout = json.dumps(pullmedworkout)   
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "medium", names)    
             return render_template("active.html", workout=pullmedworkout)
 
@@ -100,7 +113,8 @@ def workout():
             pushmedworkout = repeat_exercise(warmup, pushmed, cooldown)
             if not pushmedworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in pushmedworkout.values())   
+            names = ', '.join(value['name'] for value in pushmedworkout.values())
+            pushmedworkout = json.dumps(pushmedworkout)   
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "medium", names)    
             return render_template("active.html", workout=pushmedworkout)
         
@@ -109,7 +123,8 @@ def workout():
             legmedworkout = repeat_exercise(warmup, legmed, cooldown)
             if not legmedworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in legmedworkout.values())   
+            names = ', '.join(value['name'] for value in legmedworkout.values())
+            legmedworkout = json.dumps(legmedworkout)   
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "medium", names)    
             return render_template("active.html", workout=legmedworkout)
         
@@ -118,7 +133,8 @@ def workout():
             pushhardworkout = repeat_exercise(warmup, pushhard, cooldown)
             if not pushhardworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in pushhardworkout.values())   
+            names = ', '.join(value['name'] for value in pushhardworkout.values())
+            pushhardworkout = json.dumps(pushhardworkout)   
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "hard", names)    
             return render_template("active.html", workout=pushhardworkout)
         
@@ -127,7 +143,8 @@ def workout():
             pullhardworkout = repeat_exercise(warmup, pullhard, cooldown)
             if not pullhardworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in pullhardworkout.values())   
+            names = ', '.join(value['name'] for value in pullhardworkout.values()) 
+            pullhardworkout = json.dumps(pullhardworkout)  
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "hard", names)    
             return render_template("active.html", workout=pullhardworkout)
 
@@ -136,7 +153,8 @@ def workout():
             leghardworkout = repeat_exercise(warmup, leghard, cooldown)
             if not leghardworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in leghardworkout.values())   
+            names = ', '.join(value['name'] for value in leghardworkout.values())
+            leghardworkout = json.dumps(leghardworkout)   
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "hard", names)    
             return render_template("active.html", workout=leghardworkout)
         
@@ -152,7 +170,8 @@ def workout():
             fullbodyeasyworkout = repeat_exercise(warmup, fullbodyeasy, cooldown)
             if not fullbodyeasyworkout:		
                 return apology("Workout error", 400)	
-            names = ', '.join(value['name'] for value in fullbodyeasyworkout.values())   
+            names = ', '.join(value['name'] for value in fullbodyeasyworkout.values())  
+            fullbodyeasyworkout = json.dumps(fullbodyeasyworkout) 
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "easy", names)    
             return render_template("active.html", workout=fullbodyeasyworkout)
         
@@ -169,6 +188,7 @@ def workout():
             if not fullbodymedworkout:		
                 return apology("Workout error", 400)	
             names = ', '.join(value['name'] for value in fullbodymedworkout.values())   
+            fullbodymedworkout = json.dumps(fullbodymedworkout)
             db.execute("INSERT INTO history (user_id, level, names) VALUES (?, ?, ?)", session["user_id"], "medium", names)    
             return render_template("active.html", workout=fullbodymedworkout)
 
