@@ -16,15 +16,20 @@
 
     <link href="/static/styles.css" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
     <title>KettleWork30: {% block title %}{% endblock %}</title>
 
 </head>
 
-<body>
+<body class="custom-bg-color">
 
-    <nav class="bg-light border navbar navbar-expand-md navbar-light">
+    <nav class="bg-navbar border navbar navbar-expand-md">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><span>KettleWork</span><span class="blue">30</span></a>
+            <a class="navbar-brand mb-0 h1" href="/"><span>KettleWork30</span></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
                 data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>

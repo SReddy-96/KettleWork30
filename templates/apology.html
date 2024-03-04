@@ -1,12 +1,16 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Apology
+Apology
 {% endblock %}
 
 {% block main %}
-	<div class="container center-content">
-				<h1>{{code}}</h1>
-				<h2>{{message}}</h2>
+<div class="container center-content flex-column">
+	<div class="container">
+		<h1 class="display-2">Error code: {{code}}</h1>
 	</div>
+	<div class="container">
+		<h2 class="display-3">{{message}}</h2>
+	</div>
+</div>
 {% endblock %}

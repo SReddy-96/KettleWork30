@@ -5,8 +5,19 @@
     text-align: center;
 }
 
-nav .navbar-brand .blue
-{
-    color: #537fbe;
+.custom-bg-color {
+    background-color: #e8f1f8;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 
+
+.bg-navbar {
+    background-color: #7ea2cc;
+}
+
+footer {
+    font-size: 10px;
+}

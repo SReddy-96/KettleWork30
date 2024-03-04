@@ -53,8 +53,8 @@ Workout
     // Function to display workout
     function displayWorkout(workouts) {
         document.getElementById('workout-display').innerHTML = `
-            <h2>${workouts.name}</h2>
-            <img src="https://res.cloudinary.com/dxlhov3uy/image/upload/${workouts.image_url}.gif" alt="${workouts.name}">
+            <h2 class="">${workouts.name}</h2>
+            <img class="img-fluid" src="https://res.cloudinary.com/dxlhov3uy/image/upload/${workouts.image_url}.gif" alt="${workouts.name}">
             <p>${workouts.description}</p>
         `;
     }
