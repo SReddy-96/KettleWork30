@@ -15,7 +15,9 @@
 
 
 .bg-navbar {
-    background-color: #7ea2cc;
+    background-image: linear-gradient(to bottom, #7ea2cc, #e8f1f8);
+    border: 0 !important;
+    box-shadow: none;
 }
 
 footer {

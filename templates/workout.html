@@ -5,34 +5,56 @@ Workout
 {% endblock %}
 
 {% block main %}
-<div class="container center-content mt-5">
-    <form method="post" action="/workout">
-
-        <div class="mb-3">
-            <input type="radio" class="btn-check" name="level-outlined" id="easy" value="easy" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="easy">Easy</label>
-
-            <input type="radio" class="btn-check" name="level-outlined" id="medium" value="medium" autocomplete="off">
-            <label class="btn btn-outline-primary" for="medium">Medium</label>
-
-            <input type="radio" class="btn-check" name="level-outlined" id="hard" value="hard" autocomplete="off">
-            <label class="btn btn-outline-primary" for="hard">Hard</label>
-        </div>
-
-        <div class="mb-3">
-            <input type="radio" class="btn-check" name="exercise-outlined" id="pull" value="pull" autocomplete="off">
-            <label class="btn btn-outline-success" for="pull">Pull</label>
-            <input type="radio" class="btn-check" name="exercise-outlined" id="push" value="push" autocomplete="off">
-            <label class="btn btn-outline-success" for="push">Push</label>
-            <input type="radio" class="btn-check" name="exercise-outlined" id="leg" value="leg" autocomplete="off">
-            <label class="btn btn-outline-success" for="leg">Leg</label>
-            <input type="radio" class="btn-check" name="exercise-outlined" id="fullbody" value="fullbody" autocomplete="off">
-            <label class="btn btn-outline-success" for="fullbody">Full body</label>
-        </div>
-
-        <button class="btn btn-primary" type="submit">Start</button>
-    </form>
+<div class="container mt-2 center-content">
+    <h1 class="display-3">Workout</h1>
 </div>
 
+<div class="container center-content mt-4">
+    <div class="row mt-5">
+        <div class="card shadow col-md-6" style="background-color:#7ea2cc;">
+            <div class="card-body" >
+                <p>
+                    <strong>Start your kettleBell journey by selecting your preferred difficulty level and workout type.</strong>
+                    <br>
+                    Our app will handle the rest as you embark on a journey of strength, endurance, and total body
+                    conditioning.<br>
+                    Whether you're a seasoned kettleBell enthusiast or just starting out, our randomized 30-minute
+                    workouts will
+                    keep you engaged and motivated. Get ready to elevate your fitness game!
+                </p>
+            </div>
+        </div>
+        <div class="card shadow col-md-6">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Select Workout:</h5>
+                <form method="post" action="/workout">
+                    <div class="mb-3">
+                        <input type="radio" class="btn-check" name="level-outlined" id="easy" value="easy" checked>
+                        <label class="btn btn-outline-primary" for="easy">Easy</label>
 
+                        <input type="radio" class="btn-check" name="level-outlined" id="medium" value="medium">
+                        <label class="btn btn-outline-primary" for="medium">Medium</label>
+
+                        <input type="radio" class="btn-check" name="level-outlined" id="hard" value="hard">
+                        <label class="btn btn-outline-primary" for="hard">Hard</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="radio" class="btn-check" name="exercise-outlined" id="pull" value="pull" checked>
+                        <label class="btn btn-outline-success" for="pull">Pull</label>
+                        <input type="radio" class="btn-check" name="exercise-outlined" id="push" value="push">
+                        <label class="btn btn-outline-success" for="push">Push</label>
+                        <input type="radio" class="btn-check" name="exercise-outlined" id="leg" value="leg">
+                        <label class="btn btn-outline-success" for="leg">Leg</label>
+                        <input type="radio" class="btn-check" name="exercise-outlined" id="fullbody" value="fullbody">
+                        <label class="btn btn-outline-success" for="fullbody">Full body</label>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Start</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

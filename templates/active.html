@@ -5,8 +5,6 @@ Workout
 {% endblock %}
 
 {% block main %}
-
-<h1>Active Workout</h1>
 <div class="container center-content flex-column">
     <div id="workout-display" class="container">
 
@@ -53,8 +51,8 @@ Workout
     // Function to display workout
     function displayWorkout(workouts) {
         document.getElementById('workout-display').innerHTML = `
-            <h2 class="">${workouts.name}</h2>
-            <img class="img-fluid" src="https://res.cloudinary.com/dxlhov3uy/image/upload/${workouts.image_url}.gif" alt="${workouts.name}">
+            <h2 class="display-5 my-2">${workouts.name}</h2>
+            <img class="img-fluid mb-2" src="https://res.cloudinary.com/dxlhov3uy/image/upload/${workouts.image_url}.gif" alt="${workouts.name}">
             <p>${workouts.description}</p>
         `;
     }
@@ -62,14 +60,14 @@ Workout
     // Function to handle rest
     function rest() {
         document.getElementById('workout-display').innerHTML = `
-            <h2>REST</h2>
+            <h2 class="display-2 my-5">REST</h2>
         `;
     }
 
     // Function to handle timer finish
     function timerFinished() {
         document.getElementById('workout-display').innerHTML = `
-            <h2>Finished!</h2>
+            <h2 class="display-2 my-5">Finished!</h2>
         `;
     }
 
@@ -77,7 +75,7 @@ Workout
         var workouts = JSON.parse('{{ workout | safe }}');// Assuming workouts are passed from Flask
         var workoutKeys = Object.keys(workouts); // Get the keys of the workouts object 
         var index = 0;
-        var totalWorkouts = workouts.length;
+        var totalWorkouts = workoutKeys.length; // gets the total length of the object
 
         var display = document.querySelector('#time');
         var bar = document.querySelector('#progressBar');

@@ -6,7 +6,7 @@ History
 
 {% block main %}
 <div class="container center-content my-5">
-    <h1>Workout History</h1>
+    <h1 class="display-3">Workout History</h1>
 </div>
 <div class="container">
     <table class="table">
@@ -18,7 +18,7 @@ History
             </tr>
         </thead>
         <tbody>
-            {% for history in histories%}
+            {% for history in histories %}
             <tr>
                 <td>{{ history.Timestamp}}</td>
                 <td>{{history.level}}</td>
