@@ -1,9 +1,6 @@
 # KettleWork30
 
-<a href="https://github.com/SReddy-96/project/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/SReddy-96/project.svg?color=blue&cachedrop">
-</a>
-
+<img alt="GitHub License" src="https://img.shields.io/github/license/SReddy-96/project">
 
 This is a 30-Minute Kettlebell Workout Generator web application! Our platform offers users the flexibility to tailor their workouts according to their fitness levels and preferences. With options ranging from various difficulty levels to workout types including push, pull, legs, and full body routines, users can easily customize their exercise sessions to suit their needs.
 
