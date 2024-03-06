@@ -25,52 +25,6 @@ Workout
 
 
 <script>
-    // Function to start the timer
-    function startTimer(duration, display, bar) {
-        var timer = duration;
-        var interval = setInterval(function () {
-            var minutes = parseInt(timer / 60, 10);
-            var seconds = parseInt(timer % 60, 10);
-
-            // Update progress bar
-            bar.style.width = ((duration - timer) * 100 / duration) + "%";
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            display.textContent = minutes + ":" + seconds;
-
-            if (--timer < 0) {
-                clearInterval(interval); // Stop the timer
-                // Handle timer finish
-                timerFinished();
-            }
-        }, 1000);
-    }
-
-    // Function to display workout
-    function displayWorkout(workouts) {
-        document.getElementById('workout-display').innerHTML = `
-            <h2 class="display-5 my-2">${workouts.name}</h2>
-            <img class="img-fluid mb-2" src="https://res.cloudinary.com/dxlhov3uy/image/upload/${workouts.image_url}.gif" alt="${workouts.name}">
-            <p>${workouts.description}</p>
-        `;
-    }
-
-    // Function to handle rest
-    function rest() {
-        document.getElementById('workout-display').innerHTML = `
-            <h2 class="display-2 my-5">REST</h2>
-        `;
-    }
-
-    // Function to handle timer finish
-    function timerFinished() {
-        document.getElementById('workout-display').innerHTML = `
-            <h2 class="display-2 my-5">Finished!</h2>
-        `;
-    }
-
     window.onload = function () {
         var workouts = JSON.parse('{{ workout | safe }}');// Assuming workouts are passed from Flask
         var workoutKeys = Object.keys(workouts); // Get the keys of the workouts object 
@@ -83,8 +37,71 @@ Workout
         var restDuration = 20; // Duration for rest in seconds
         var totalTime = 1800; // total time of 30mins in seconds
 
+        // Function to start the timer
+        function startTimer(duration, display, bar) {
+            var timer = duration;
+            var interval = setInterval(function () {
+                var minutes = parseInt(timer / 60, 10);
+                var seconds = parseInt(timer % 60, 10);
+
+                // Update progress bar
+                bar.style.width = ((duration - timer) * 100 / duration) + "%";
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval); // Stop the timer
+                    // Handle timer finish
+                    timerFinished();
+                }
+            }, 1000);
+        }
+
+        function displayWorkout(workouts, index) {
+            if (workouts && index < totalWorkouts) {
+                var currentWorkout = workouts[workoutKeys[index]]; // Accessing workout using its key
+                if (currentWorkout) {
+                    // if the image_url is empty or does load correctly then it displays a mock image.
+                    var imageUrl = currentWorkout.image_url ? currentWorkout.image_url : '../static/mockimage/mockexercise.jpg'; // Set the mock image path if image_url is null
+                    var imageElement = document.createElement('img');
+                    imageElement.src = "https://res.cloudinary.com/dxlhov3uy/image/upload/" + imageUrl + ".gif";
+                    imageElement.onerror = function() {
+                        // If the image fails to load, replace it with the mock image
+                        this.src = '../static/mockimage/mockexercise.jpg';
+                    };
+                document.getElementById('workout-display').innerHTML = `
+                <h2 class="display-5 my-2">${currentWorkout.name}</h2>
+                <img class="img-fluid mb-2" src="${imageElement.src}" alt="${currentWorkout.name}">
+                <p>${currentWorkout.description}</p>
+            `;
+                } else {
+                    console.error("Current workout is undefined or null");
+                }
+            } else {
+                console.error("Workouts object is undefined or null, or index is out of bounds");
+            }
+        }
+
+
+        // Function to handle rest
+        function rest() {
+            document.getElementById('workout-display').innerHTML = `
+            <h2 class="display-2 my-5">REST</h2>
+        `;
+        }
+
+        // Function to handle timer finish
+        function timerFinished() {
+            document.getElementById('workout-display').innerHTML = `
+            <h2 class="display-2 my-5">Finished!</h2>
+        `;
+        }
+
         // start the first workout 
-        displayWorkout(workouts[workoutKeys[index]]);
+        displayWorkout(workouts, index);
         index++
 
         // Start the timer for the first workout
@@ -98,31 +115,21 @@ Workout
 
         // Set up intervals to alternate between displaying workouts and rest
         var interval = setInterval(function () {
+            // If all workouts are displayed, stop the interval
+            if (index >= totalWorkouts) {
+                clearInterval(interval);
+                // Display "Finished" message
+                timerFinished();
+                return;
+            }
             // Display workout
-            var currentWorkout = workouts[workoutKeys[index]]; // Accessing workout using its key
-            displayWorkout(currentWorkout);
-            console.log(index);
+            displayWorkout(workouts, index);
             index++;
 
             // Display rest after displaying workout
             setTimeout(function () {
                 rest();
             }, workoutDuration * 1000);
-
-            // If all workouts are displayed, stop the interval
-            if (index >= totalWorkouts) {
-                clearInterval(interval);
-                displayWorkout(workouts[workoutKeys[totalWorkouts]]);
-
-                setTimeout(function () {
-                    rest();
-                }, workoutDuration * 1000);
-
-                console.log("finished:", index);
-                // Display "Finished" message
-                timerFinished();
-                return;
-            }
 
         }, (workoutDuration + restDuration) * 1000); // Interval is total duration of workout + rest (60s)
     }
