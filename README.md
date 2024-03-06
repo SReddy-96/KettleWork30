@@ -1,6 +1,6 @@
 # KettleWork30
 
-<a href="https://github.com/SReddy-96/project/blob/main/LICENSE">
+<a href="https://github.com/SReddy-96/project/LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/SReddy-96/project.svg?color=blue&cachedrop">
 </a>
 
