@@ -1,22 +1,10 @@
-import os
 from cs50 import SQL
-import cloudinary
-from cloudinary import CloudinaryImage
-import cloudinary.uploader
-import cloudinary.api 
-from dotenv import load_dotenv
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 import json
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required, rand_workout, repeat_exercise
-
-#load .env
-#load_dotenv()
-
-# Set configuration parameter: return "https" URLs by setting secure=True  
-#cloudinary.config(secure=True, cloud_url=os.getenv(CLOUDINARY_URL))
 
 # Configure application
 app = Flask(__name__)
