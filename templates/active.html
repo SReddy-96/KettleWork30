@@ -94,27 +94,35 @@ Workout
         setTimeout(function () {
             rest();
         }, workoutDuration * 1000);
-        
+
 
         // Set up intervals to alternate between displaying workouts and rest
         var interval = setInterval(function () {
-        // Display workout
+            // Display workout
             var currentWorkout = workouts[workoutKeys[index]]; // Accessing workout using its key
             displayWorkout(currentWorkout);
+            console.log(index);
             index++;
-
-            // If all workouts are displayed, stop the interval
-            if (index >= totalWorkouts) {
-                clearInterval(interval);
-                // Display "Finished" message
-                timerFinished();
-                return;
-            }
 
             // Display rest after displaying workout
             setTimeout(function () {
                 rest();
             }, workoutDuration * 1000);
+
+            // If all workouts are displayed, stop the interval
+            if (index >= totalWorkouts) {
+                clearInterval(interval);
+                displayWorkout(workouts[workoutKeys[totalWorkouts]]);
+
+                setTimeout(function () {
+                    rest();
+                }, workoutDuration * 1000);
+
+                console.log("finished:", index);
+                // Display "Finished" message
+                timerFinished();
+                return;
+            }
 
         }, (workoutDuration + restDuration) * 1000); // Interval is total duration of workout + rest (60s)
     }
