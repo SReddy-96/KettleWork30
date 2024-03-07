@@ -1,5 +1,9 @@
 # KettleWork30
 
+## Video Demo: 
+
+[YouTube Link](https://youtu.be/QKvaNgVkPXI?si=dhktOYcDyyFQXBod)
+
 This is a 30-Minute Kettlebell Workout Generator web application! Our platform offers users the flexibility to tailor their workouts according to their fitness levels and preferences. With options ranging from various difficulty levels to workout types including push, pull, legs, and full body routines, users can easily customize their exercise sessions to suit their needs.
 
 ## Problem Description
@@ -31,7 +35,7 @@ The Workout page serves as the gateway to our workout generator, where users are
 
 Utilizing Bootstrap, the radio buttons are styled seamlessly and organized within a form structure, simplifying the process of sending a post request to app.py. Error handling is implemented to ensure completeness of form fields, directing users to Apology.HTML with appropriate error codes if any fields are incomplete. Pre-selecting radio buttons in each section enhances user experience and aids in error prevention.
 
-By leveraging the card class in Bootstrap, our web app adapts to various screen sizes, promoting inclusivity and enhancing mobile-friendliness. The card stacking feature optimizes the layout, ensuring a seamless experience regardless of device width.
+By leveraging the card class in Bootstrap, our web app adapts to various screen sizes, promoting inclusively and enhancing mobile-friendliness. The card stacking feature optimizes the layout, ensuring a seamless experience regardless of device width.
 
 ### History
 <p align="center">
@@ -111,7 +115,7 @@ Exercise displays persist for 4000ms before transitioning to REST for 2000ms, re
 ### Running Web Page
 - Make sure to have Flask and Python installed before proceeding.
 
-Clone the respository:
+Clone the repository:
 ```
 git clone https://github.com/SReddy-96/project
 ```
