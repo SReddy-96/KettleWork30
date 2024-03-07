@@ -117,7 +117,7 @@ Exercise displays persist for 4000ms before transitioning to REST for 2000ms, re
 
 Clone the repository:
 ```
-git clone https://github.com/SReddy-96/project
+git clone https://github.com/SReddy-96/KettleWork30
 ```
 Navigate into directory:
 ```
