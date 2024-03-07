@@ -121,7 +121,7 @@ git clone https://github.com/SReddy-96/KettleWork30
 ```
 Navigate into directory:
 ```
-cd project
+cd KettleWork30
 ```
 Install Dependencies:
 ```
